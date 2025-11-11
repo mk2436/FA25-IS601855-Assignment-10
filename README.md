@@ -480,6 +480,40 @@ curl -X POST "http://localhost:8000/divide" \
      -d '{"a": 10, "b": 0}'
 ```
 
+# 🐘 SQLAlchemy User Model
+
+The project defines a `User` model using SQLAlchemy.  
+It includes the following columns:
+
+- `username`: Must be unique, stores the user's name.  
+- `email`: Must be unique, stores the user's email address.  
+- `password_hash`: Stores the hashed password securely.  
+- `created_at`: Automatically records when the user account was created.  
+
+This ensures that each user is uniquely identifiable and password data is stored safely.
+
+---
+
+# 📝 Pydantic Schemas
+
+Pydantic schemas are used to manage input and output data for the API:
+
+- **UserCreate**: Used when registering a new user, includes `username`, `email`, and `password`.  
+- **UserRead**: Used when returning user details, includes `id`, `username`, `email`, and `created_at` but does **not** include the password hash.  
+
+These schemas ensure proper data validation and security by not exposing sensitive information.
+
+---
+
+# 🔒 Password Hashing
+
+Passwords are stored securely by hashing before saving to the database.  
+
+- A hashing function converts plain-text passwords into a secure hash.  
+- A verification function checks if a plain-text password matches the stored hash.  
+
+This approach keeps user passwords safe and ensures authentication works securely.
+
 ---
 
 # 🧪 Testing
